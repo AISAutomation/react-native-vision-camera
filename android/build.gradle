@@ -125,6 +125,12 @@ if (ENABLE_FRAME_PROCESSORS) {
   }
 }
 
+def jsonFile = file("$nodeModules/react-native-reanimated/package.json")
+def reanimedpackage = new groovy.json.JsonSlurper().parseText(jsonFile.text)
+
+def REACT_REANIMATED_FULL_VERSION = reanimedpackage.version
+def REACT_REANIMATED_VERSION = reanimedpackage.version.split("\\.")[1].toInteger()
+
 android {
   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
   buildToolsVersion getExtOrDefault('buildToolsVersion')
@@ -143,7 +149,8 @@ android {
                   "-DREACT_NATIVE_VERSION=${REACT_NATIVE_VERSION}",
                   "-DNODE_MODULES_DIR=${nodeModules}",
                   "-DFOR_HERMES=${FOR_HERMES}",
-                  "-DJS_RUNTIME_DIR=${jsRuntimeDir}"
+                  "-DJS_RUNTIME_DIR=${jsRuntimeDir}",
+                  "-DREACT_REANIMATED_VERSION=${REACT_REANIMATED_VERSION}"
         }
       }
     }
