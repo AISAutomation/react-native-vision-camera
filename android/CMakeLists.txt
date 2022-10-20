@@ -1,3 +1,4 @@
+project(VisionCamera)
 cmake_minimum_required(VERSION 3.4.1)
 
 set (CMAKE_VERBOSE_MAKEFILE ON)
@@ -39,6 +40,34 @@ add_library(
 
 file (GLOB LIBFBJNI_INCLUDE_DIR "${BUILD_DIR}/fbjni-*-headers.jar/")
 
+if(${REACT_REANIMATED_VERSION} LESS 11)
+    target_include_directories(
+        ${PACKAGE_NAME}
+        PRIVATE
+        # --- Reanimated ---
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/AnimatedSensor"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/Tools"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/SpecTools"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/SharedItems"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/Registries"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/LayoutAnimations"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/hidden_headers"
+        )
+else()
+    target_include_directories(
+        ${PACKAGE_NAME}
+        PRIVATE
+        # --- Reanimated ---
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/AnimatedSensor"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/Tools"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/SpecTools"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/SharedItems"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/Registries"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/LayoutAnimations"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/hidden_headers"
+        )
+endif()
+
 target_include_directories(
         ${PACKAGE_NAME}
         PRIVATE
@@ -60,20 +89,6 @@ target_include_directories(
         "${NODE_MODULES_DIR}/hermes-engine/android/include/"
         ${INCLUDE_JSI_CPP} # only on older RN versions
         ${INCLUDE_JSIDYNAMIC_CPP} # only on older RN versions
-        # --- Reanimated ---
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/AnimatedSensor"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/Tools"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/SpecTools"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/SharedItems"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/Registries"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/LayoutAnimations"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/hidden_headers"
-         "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/AnimatedSensor"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/Tools"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/SpecTools"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/SharedItems"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/Registries"
-        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/LayoutAnimations"
         "src/main/cpp"
 )
 
