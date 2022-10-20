@@ -68,6 +68,12 @@ target_include_directories(
         "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/Registries"
         "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/headers/LayoutAnimations"
         "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/hidden_headers"
+         "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/AnimatedSensor"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/Tools"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/SpecTools"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/SharedItems"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/Registries"
+        "${NODE_MODULES_DIR}/react-native-reanimated/Common/cpp/LayoutAnimations"
         "src/main/cpp"
 )
 
